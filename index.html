@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercício - Planetas</title>
+</head>
+<body>
+  <h1>Exercício JavaScript - Planetas</h1>
+  <h5>Valores iniciais</h5>
+  <p>let planetas = {
+      Terra: 2,
+      Marte: 1,
+      Jupiter: 3
+    };</p>
+  <p>Abra o console do navegador para ver os resultados.</p>
+
+  <script>
+    
+
+    let planetas = {
+      Terra: 2,
+      Marte: 1,
+      Jupiter: 3
+    };
+
+   
+
+    // 
+    // SITUAÇÃO 1
+    // Objetivo:
+    // Adicionar 1 visita ao planeta Marte
+    // 
+
+    // BLOCO A
+    // planetas["Marte"] =+ 1;
+    // console.log("Situação 1:", planetas);
+
+    // BLOCO B
+    // planetas["Marte"] += 1;
+    // console.log("Situação 1:", planetas);
+
+    // BLOCO C
+    // planetas += 1;
+    // console.log("Situação 1:", planetas);
+
+
+    // 
+    // SITUAÇÃO 2
+    // Objetivo:
+    // Remover 1 visita do planeta Júpiter
+    // 
+
+    // BLOCO A
+    // planetas["Jupiter"] -= 1;
+    // console.log("Situação 2:", planetas);
+
+    // BLOCO B
+    // planetas["Jupiter"] =- 1;
+    // console.log("Situação 2:", planetas);
+
+    // BLOCO C
+    // planetas["Jupiter"]--;
+    // planetas["Marte"]--;
+    // console.log("Situação 2:", planetas);
+
+
+    // 
+    // SITUAÇÃO 3
+    // Objetivo:
+    // Mostrar no console apenas as quantidades de visitas
+    // usando Object.values()
+    // 
+
+    // BLOCO A
+    // const quantidades = Object.entries(planetas);
+    // console.log("Situação 3:", quantidades);
+
+    // BLOCO B
+    // const quantidades = Object.values(planetas);
+    // console.log("Situação 3:", quantidades);
+
+    // BLOCO C
+    // const quantidades = Object.value(planetas);
+    // console.log("Situação 3:", quantidades);
+
+
+    // 
+    // SITUAÇÃO 4
+    // Objetivo:
+    // Mostrar o nome de cada planeta e sua quantidade de visitas
+    // usando Object.entries()
+    // 
+
+    // BLOCO A
+    // const listaPlanetas = Object.values(planetas);
+    // listaPlanetas.forEach((item) => {
+    //   console.log(item[0], item[1]);
+    // });
+
+    // BLOCO B
+    // const listaPlanetas = Object.entries(planetas);
+    // listaPlanetas.forEach((item) => {
+    //   console.log(item[0] + ": " + item[1]);
+    // });
+
+    // BLOCO C
+    // const listaPlanetas = Object.entries(planetas);
+    // listaPlanetas.forEach((item) => {
+    //   console.log(item);
+    //   console.log(planetas);
+    //   console.log("fim");
+    //   console.log("erro proposital");
+    // });
+
+  </script>
+</body>
+</html>
