@@ -1,0 +1,370 @@
+/* =========================================
+   1) VARIÁVEIS DE CORES (tema do app)
+   =========================================
+   :root guarda "variáveis CSS" (--nome) que podem ser usadas no projeto inteiro.
+   Vantagem: muda o tema todo só mexendo aqui.
+*/
+
+:root {
+  --bg: #3c415b;
+  /* cor de fundo principal (escura) */
+  --card: #171a2b;
+  /* cor das caixas (cards) */
+  --text: #f2f3f7;
+  /* cor do texto principal */
+  --muted: #a9acc0;
+  /* texto “apagado” (descrições) */
+  --primary: #6c5ce7;
+  /* cor de ação (botões principais) */
+  --danger: #ff5d5d;
+  /* cor de alerta/remoção (ex: favorito ativo) */
+  --success: #2ecc71;
+  /* cor de sucesso (se quiser usar depois) */
+  --border: rgba(255, 255, 255, 0.08);
+  /* borda suave (transparente) */
+}
+
+/* =========================================
+   2) RESET BÁSICO
+   =========================================
+   Zera margens/paddings e define box-sizing para facilitar layout.
+   box-sizing: border-box -> largura/altura incluem padding e borda.
+*/
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, Arial, sans-serif;
+}
+
+/* =========================================
+   3) BODY (fundo e cor do texto geral)
+   =========================================
+   Define o fundo com gradient + cor do texto.
+*/
+body {
+  background: radial-gradient(circle at top, #4e578c, var(--bg));
+  /* fundo com “luz” em cima */
+  color: var(--text);
+  /* texto padrão */
+  min-height: 100vh;
+  /*ocupa altura total da tela */
+}
+
+/* Texto secundário (descrições e dicas) */
+
+/* =========================================
+   4) TOPBAR (cabeçalho fixo no topo)
+   =========================================
+   sticky = cola no topo quando rola a página.
+   backdrop-filter = “vidro fosco” (efeito blur) atrás.
+*/
+
+.topbar {
+  position: sticky;
+  top: 0;
+  background: rgba(15, 18, 32, 0.85);
+  /* fundo semi-transparente */
+  backdrop-filter: blur(12px);
+  /* blur (efeito vidro) */
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px;
+  z-index: 10;
+  /* fica por cima dos elementos */
+}
+
+/* Parte do “logo + nome do app” */
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* “Logo” em formato de quadradinho com emoji */
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--card);
+
+  /* centraliza o emoji no meio */
+  display: grid;
+  place-items: center;
+
+  font-size: 1.2rem;
+  border: 1px solid var(--border);
+}
+
+/* Título do app */
+.brand h1 {
+  font-size: 1.15rem;
+}
+
+
+/* =========================================
+   5) NAV (botões de navegação das telas)
+   =========================================
+   Os botões ficam lado a lado e com espaçamento.
+*/
+.nav {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+/* Botões tipo “abas” (Cardápio, Favoritos, Carrinho) */
+.tab-btn {
+  flex: 1;
+  /* cada botão ocupa o mesmo espaço */
+  padding: 10px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  cursor: pointer;
+
+  /* animações suaves */
+  transition: transform 0.12s ease, background 0.12s ease;
+  font-weight: 600;
+}
+
+/* Quando passa o mouse, sobe 1px (efeito de “clique”) */
+.tab-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Botão ativo (aba atual) */
+.tab-btn.active {
+  background: rgba(108, 92, 231, 0.25);
+  border-color: rgba(108, 92, 231, 0.5);
+}
+
+/* =========================================
+   6) BADGE (bolinha com número do carrinho)
+   ========================================= */
+.badge {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  /* bem redondinho */
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.85rem;
+}
+
+
+/*star here 2*/
+
+/* =========================================
+   7) CONTAINER (limita largura + centraliza)
+   ========================================= */
+.container {
+  padding: 16px;
+  max-width: 980px;
+  /* não fica gigante em telas grandes */
+  margin: 0 auto;
+  /* centraliza horizontalmente */
+}
+
+
+/* =========================================
+   8) TELAS (SPA: só uma tela aparece)
+   =========================================
+   Por padrão: display:none
+   Quando está “active”: display:block
+*/
+.screen {
+  display: none;
+  animation: fadeIn 0.18s ease;
+  /* animazinho ao aparecer */
+}
+
+.screen.active {
+  display: block;
+}
+
+/* Animação simples: aparece e sobe levemente */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cabeçalho interno de cada tela */
+.screen-header {
+  margin: 10px 0 16px 0;
+}
+
+.screen-header h2 {
+  font-size: 1.25rem;
+  margin-bottom: 6px;
+}
+
+
+/* =========================================
+   9) GRID DE PRODUTOS (cardápio e favoritos)
+   =========================================
+   No celular: 1 coluna
+   Em telas >= 640px: 2 colunas (responsivo)
+*/
+.grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 12px;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================
+   10) CARD (cada produto)
+   =========================================
+   display:flex -> imagem à esquerda e texto à direita.
+*/
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px;
+
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* Imagem do produto */
+.card img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  /* não distorce, corta se precisar */
+  border-radius: 14px;
+  border: 1px solid var(--border);
+}
+
+/* Área do texto do card (nome, descrição, preço) */
+.card-info {
+  flex: 1;
+  /* ocupa o espaço que sobrar */
+}
+
+.card-info h3 {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+
+/* Preço em destaque */
+.price {
+  font-weight: 800;
+  margin-top: 6px;
+}
+
+/* Botões do card (favoritar e adicionar) */
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  /* um em cima do outro */
+  gap: 8px;
+}
+
+/* Botões com ícone (❤️ e ➕) */
+.icon-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  font-size: 1.05rem;
+  color: var(--text);
+}
+
+/* Quando o favorito está ativo: muda cor e “destaca” */
+.icon-btn.fav.active {
+  border-color: rgba(255, 93, 93, 0.6);
+  background: rgba(255, 93, 93, 0.18);
+}
+
+
+/*Aula 4*/
+
+/*=========================================11) CARRINHO (lista e itens)=========================================*/
+
+/* Lista de itens do carrinho em coluna */
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Cada linha/item do carrinho */
+.cart-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Mini-imagem no carrinho */
+.cart-item img {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+/* Título e info do item: ocupa espaço do meio */
+.cart-item .title {
+  flex: 1;
+}
+
+/* Controles de quantidade ( -  qtd  + ) */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Botões de quantidade (mais/menos) */
+.qty-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+/* Caixa do resumo do carrinho (Total + botão confirmar) */
+.cart-summary {
+  margin-top: 14px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+}
+
+/* Linha: “Total: R$ 0,00” (um em cada canto) */
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}

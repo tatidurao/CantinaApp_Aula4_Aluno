@@ -1,118 +1,99 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exercício - Planetas</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cantina da Escola</title>
+
+  <!-- CSS separado: ensina organização -->
+  <link rel="stylesheet" href="./css/style.css" />
 </head>
 <body>
-  <h1>Exercício JavaScript - Planetas</h1>
-  <h5>Valores iniciais</h5>
-  <p>let planetas = {
-      Terra: 2,
-      Marte: 1,
-      Jupiter: 3
-    };</p>
-  <p>Abra o console do navegador para ver os resultados.</p>
+  <!-- Topo do app -->
+  <header class="topbar">
+    <div class="brand">
+      <!-- Você pode colocar um logo em assets -->
+      <div class="logo">🍔</div>
+      <div>
+        <h1>Cantina da Escola</h1>
+        <p id="todayLabel" class="muted">Carregando data...</p>
+      </div>
+    </div>
 
-  <script>
-    
+    <!-- Botões de navegação (telas) -->
+    <nav class="nav">
+      <button class="tab-btn active" data-screen="menuScreen">Cardápio</button>
+      <button class="tab-btn" data-screen="favoritesScreen">Favoritos</button>
+      <button class="tab-btn" data-screen="cartScreen">
+        Carrinho <span id="cartBadge" class="badge">0</span>
+      </button>
+    </nav>
+  </header>
 
-    let planetas = {
-      Terra: 2,
-      Marte: 1,
-      Jupiter: 3
-    };
+  <!-- Conteúdo principal -->
+  <main class="container">
 
-   
+    <!-- TELA 1: Cardápio -->
+    <section id="menuScreen" class="screen active">
+      <div class="screen-header">
+        <h2>Cardápio do Dia</h2>
+        <p class="muted">Toque em ❤️ para favoritar e em ➕ para adicionar ao carrinho.</p>
+      </div>
 
-    // 
-    // SITUAÇÃO 1
-    // Objetivo:
-    // Adicionar 1 visita ao planeta Marte
-    // 
+      <!-- Lista de produtos será criada pelo JS -->
+      <div id="menuGrid" class="grid"></div>
+    </section>
 
-    // BLOCO A
-    // planetas["Marte"] =+ 1;
-    // console.log("Situação 1:", planetas);
+    <!--Aula 3-->
 
-    // BLOCO B
-    // planetas["Marte"] += 1;
-    // console.log("Situação 1:", planetas);
+    <!-- TELA 2: Favoritos -->
+    <section id="favoritesScreen" class="screen">
+      <div class="screen-header">
+        <h2>Meus Favoritos</h2>
+        <p class="muted">Seus lanches preferidos ficam aqui.</p>
+      </div>
 
-    // BLOCO C
-    // planetas += 1;
-    // console.log("Situação 1:", planetas);
+      <div id="favoritesGrid" class="grid"></div>
 
+      <!-- Estado vazio: ensina UX (quando não tem nada) -->
+      <div id="favoritesEmpty" class="empty-state">
+        <p>Você ainda não favoritou nada 😅</p>
+        <button class="primary" data-go="menuScreen">Ver cardápio</button>
+      </div>
+    </section>
 
-    // 
-    // SITUAÇÃO 2
-    // Objetivo:
-    // Remover 1 visita do planeta Júpiter
-    // 
+    <!-- TELA 3: Carrinho -->
+    <section id="cartScreen" class="screen">
+      <div class="screen-header">
+        <h2>Meu Carrinho</h2>
+        <p class="muted">Confira seu pedido antes de confirmar.</p>
+      </div>
 
-    // BLOCO A
-    // planetas["Jupiter"] -= 1;
-    // console.log("Situação 2:", planetas);
+      <div id="cartList" class="cart-list"></div>
 
-    // BLOCO B
-    // planetas["Jupiter"] =- 1;
-    // console.log("Situação 2:", planetas);
+      <div id="cartEmpty" class="empty-state">
+        <p>Seu carrinho está vazio 🛒</p>
+        <button class="primary" data-go="menuScreen">Adicionar itens</button>
+      </div>
 
-    // BLOCO C
-    // planetas["Jupiter"]--;
-    // planetas["Marte"]--;
-    // console.log("Situação 2:", planetas);
+      <!-- Resumo do carrinho -->
+      <div class="cart-summary">
+        <div class="summary-line">
+          <span>Total:</span>
+          <strong id="cartTotal">R$ 0,00</strong>
+        </div>
 
+        <button id="confirmOrderBtn" class="primary full">
+          Confirmar Pedido
+        </button>
+      </div>
+    </section>
 
-    // 
-    // SITUAÇÃO 3
-    // Objetivo:
-    // Mostrar no console apenas as quantidades de visitas
-    // usando Object.values()
-    // 
+  </main>
 
-    // BLOCO A
-    // const quantidades = Object.entries(planetas);
-    // console.log("Situação 3:", quantidades);
-
-    // BLOCO B
-    // const quantidades = Object.values(planetas);
-    // console.log("Situação 3:", quantidades);
-
-    // BLOCO C
-    // const quantidades = Object.value(planetas);
-    // console.log("Situação 3:", quantidades);
-
-
-    // 
-    // SITUAÇÃO 4
-    // Objetivo:
-    // Mostrar o nome de cada planeta e sua quantidade de visitas
-    // usando Object.entries()
-    // 
-
-    // BLOCO A
-    // const listaPlanetas = Object.values(planetas);
-    // listaPlanetas.forEach((item) => {
-    //   console.log(item[0], item[1]);
-    // });
-
-    // BLOCO B
-    // const listaPlanetas = Object.entries(planetas);
-    // listaPlanetas.forEach((item) => {
-    //   console.log(item[0] + ": " + item[1]);
-    // });
-
-    // BLOCO C
-    // const listaPlanetas = Object.entries(planetas);
-    // listaPlanetas.forEach((item) => {
-    //   console.log(item);
-    //   console.log(planetas);
-    //   console.log("fim");
-    //   console.log("erro proposital");
-    // });
-
-  </script>
+  <!-- JS separado em arquivos: ensina modularização -->
+  <script src="./js/data.js"></script>
+  <script src="./js/utils.js"></script>
+  <script src="./js/app.js"></script>
 </body>
 </html>
